@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CURSO CTP001 - Ficha de Apreciação Individual (FAI)</title>
+  <style>
+    :root{--gap:8px;--pad:10px;--border:#ccc}
+    body{font-family:Arial,Helvetica,sans-serif;margin:20px;color:#111}
+    h1{font-size:18px;margin-bottom:6px}
+    .meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+    .meta label{display:flex;flex-direction:column;font-size:14px}
+    table{width:100%;border-collapse:collapse;margin-bottom:12px}
+    th,td{border:1px solid var(--border);padding:6px;text-align:left;font-size:13px}
+    th.center,td.center{text-align:center}
+    .options{display:flex;gap:6px;justify-content:center}
+    .section-title{background:#f3f3f3;font-weight:700}
+    .controls{display:flex;gap:8px;margin-top:12px}
+    button{padding:8px 12px;border:1px solid #888;background:#fff;cursor:pointer}
+    button.primary{background:#0b63b6;color:#fff;border-color:#055a9e}
+    .result{margin-top:12px;padding:10px;border:1px dashed #aaa;background:#fafafa}
+    @media print{
+      .no-print{display:none}
+    }
+  </style>
+</head>
+<body>
+  <h1>CURSO CTP001 - FICHA DE APRECIAÇÃO INDIVIDUAL (FAI)</h1>
+
+  <div class="meta">
+    <label>Turma<input id="turma" type="text"></label>
+    <label>OM<input id="om" type="text"></label>
+    <label>Aluno<input id="aluno" type="text"></label>
+    <label>Instrutor<input id="instrutor" type="text"></label>
+    <label>Ano<input id="ano" type="text" placeholder="2025"></label>
+  </div>
+
+  <form id="faiForm">
+    <!-- Mapeamento de pontuação por opção:
+         ÓTIMO = 1.0
+         BOM = 0.75
+         REGULAR = 0.5
+         INSUFICIENTE = 0.0
+         Para VII (TEMPO): ÓTIMO = 1.0 / INSUFICIENTE = 0.0
+    -->
+
+    <!-- I INTRODUÇÃO (1,0) -->
+    <table>
+      <tr class="section-title"><th>I - INTRODUÇÃO (1,0)</th><th class="center">ÓTIMO</th><th class="center">BOM</th><th class="center">REGULAR</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-I">
+        <tr><td>Inicia a apresentação cumprimentando a audiência?</td><td class="center"><input type="radio" name="I_q1" value="1" required></td><td class="center"><input type="radio" name="I_q1" value="0.75"></td><td class="center"><input type="radio" name="I_q1" value="0.5"></td><td class="center"><input type="radio" name="I_q1" value="0"></td></tr>
+        <tr><td>Desperta a atenção da audiência para o assunto?</td><td class="center"><input type="radio" name="I_q2" value="1" required></td><td class="center"><input type="radio" name="I_q2" value="0.75"></td><td class="center"><input type="radio" name="I_q2" value="0.5"></td><td class="center"><input type="radio" name="I_q2" value="0"></td></tr>
+        <tr><td>Mostra a importância do assunto para a vida profissional e pessoal da audiência?</td><td class="center"><input type="radio" name="I_q3" value="1" required></td><td class="center"><input type="radio" name="I_q3" value="0.75"></td><td class="center"><input type="radio" name="I_q3" value="0.5"></td><td class="center"><input type="radio" name="I_q3" value="0"></td></tr>
+        <tr><td>Apresenta o Objetivo Específico da apresentação?</td><td class="center"><input type="radio" name="I_q4" value="1" required></td><td class="center"><input type="radio" name="I_q4" value="0.75"></td><td class="center"><input type="radio" name="I_q4" value="0.5"></td><td class="center"><input type="radio" name="I_q4" value="0"></td></tr>
+        <tr><td>Apresenta o roteiro fazendo um pequeno sumário dos tópicos?</td><td class="center"><input type="radio" name="I_q5" value="1" required></td><td class="center"><input type="radio" name="I_q5" value="0.75"></td><td class="center"><input type="radio" name="I_q5" value="0.5"></td><td class="center"><input type="radio" name="I_q5" value="0"></td></tr>
+        <tr><td>Realiza a introdução em torno do estipulado pela técnica?</td><td class="center"><input type="radio" name="I_q6" value="1" required></td><td class="center"><input type="radio" name="I_q6" value="0.75"></td><td class="center"><input type="radio" name="I_q6" value="0.5"></td><td class="center"><input type="radio" name="I_q6" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- II DESENVOLVIMENTO (2,5) -->
+    <table>
+      <tr class="section-title"><th>II - DESENVOLVIMENTO (2,5)</th><th class="center">ÓTIMO</th><th class="center">BOM</th><th class="center">REGULAR</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-II">
+        <!-- 12 itens no exemplo do PDF; ajustar se precisar -->
+        <tr><td>Desenvolve cada tópico do roteiro, de forma clara, estabelecendo relações entre as ideias?</td><td class="center"><input type="radio" name="II_q1" value="1" required></td><td class="center"><input type="radio" name="II_q1" value="0.75"></td><td class="center"><input type="radio" name="II_q1" value="0.5"></td><td class="center"><input type="radio" name="II_q1" value="0"></td></tr>
+        <tr><td>Estabelece transição entre os tópicos apresentados no roteiro?</td><td class="center"><input type="radio" name="II_q2" value="1" required></td><td class="center"><input type="radio" name="II_q2" value="0.75"></td><td class="center"><input type="radio" name="II_q2" value="0.5"></td><td class="center"><input type="radio" name="II_q2" value="0"></td></tr>
+        <tr><td>Esclarece termos, siglas, etc., não familiares à audiência?</td><td class="center"><input type="radio" name="II_q3" value="1" required></td><td class="center"><input type="radio" name="II_q3" value="0.75"></td><td class="center"><input type="radio" name="II_q3" value="0.5"></td><td class="center"><input type="radio" name="II_q3" value="0"></td></tr>
+        <tr><td>Usa exemplos, citações, analogias, estatísticas etc., ao menos uma vez, para fundamentar as ideias expostas?</td><td class="center"><input type="radio" name="II_q4" value="1" required></td><td class="center"><input type="radio" name="II_q4" value="0.75"></td><td class="center"><input type="radio" name="II_q4" value="0.5"></td><td class="center"><input type="radio" name="II_q4" value="0"></td></tr>
+        <tr><td>Encoraja a audiência a participar da instrução?</td><td class="center"><input type="radio" name="II_q5" value="1" required></td><td class="center"><input type="radio" name="II_q5" value="0.75"></td><td class="center"><input type="radio" name="II_q5" value="0.5"></td><td class="center"><input type="radio" name="II_q5" value="0"></td></tr>
+        <tr><td>Verifica o alcance dos objetivos operacionalizados?</td><td class="center"><input type="radio" name="II_q6" value="1" required></td><td class="center"><input type="radio" name="II_q6" value="0.75"></td><td class="center"><input type="radio" name="II_q6" value="0.5"></td><td class="center"><input type="radio" name="II_q6" value="0"></td></tr>
+        <tr><td>Desenvolve o conteúdo, de acordo com o planejado?</td><td class="center"><input type="radio" name="II_q7" value="1" required></td><td class="center"><input type="radio" name="II_q7" value="0.75"></td><td class="center"><input type="radio" name="II_q7" value="0.5"></td><td class="center"><input type="radio" name="II_q7" value="0"></td></tr>
+        <tr><td>Demonstra conhecimento do assunto ministrado?</td><td class="center"><input type="radio" name="II_q8" value="1" required></td><td class="center"><input type="radio" name="II_q8" value="0.75"></td><td class="center"><input type="radio" name="II_q8" value="0.5"></td><td class="center"><input type="radio" name="II_q8" value="0"></td></tr>
+        <tr><td>Realiza o desenvolvimento em torno do estipulado pela técnica?</td><td class="center"><input type="radio" name="II_q9" value="1" required></td><td class="center"><input type="radio" name="II_q9" value="0.75"></td><td class="center"><input type="radio" name="II_q9" value="0.5"></td><td class="center"><input type="radio" name="II_q9" value="0"></td></tr>
+        <tr><td>Controla a participação da audiência?</td><td class="center"><input type="radio" name="II_q10" value="1" required></td><td class="center"><input type="radio" name="II_q10" value="0.75"></td><td class="center"><input type="radio" name="II_q10" value="0.5"></td><td class="center"><input type="radio" name="II_q10" value="0"></td></tr>
+        <tr><td>Esclarece as dúvidas da audiência quando solicitado?</td><td class="center"><input type="radio" name="II_q11" value="1" required></td><td class="center"><input type="radio" name="II_q11" value="0.75"></td><td class="center"><input type="radio" name="II_q11" value="0.5"></td><td class="center"><input type="radio" name="II_q11" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- III CONCLUSÃO (1,0) -->
+    <table>
+      <tr class="section-title"><th>III - CONCLUSÃO (1,0)</th><th class="center">ÓTIMO</th><th class="center">BOM</th><th class="center">REGULAR</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-III">
+        <tr><td>Revisa os tópicos do roteiro, enfatizando as principais ideias?</td><td class="center"><input type="radio" name="III_q1" value="1" required></td><td class="center"><input type="radio" name="III_q1" value="0.75"></td><td class="center"><input type="radio" name="III_q1" value="0.5"></td><td class="center"><input type="radio" name="III_q1" value="0"></td></tr>
+        <tr><td>Relaciona as principais ideias ao objetivo da subunidade?</td><td class="center"><input type="radio" name="III_q2" value="1" required></td><td class="center"><input type="radio" name="III_q2" value="0.75"></td><td class="center"><input type="radio" name="III_q2" value="0.5"></td><td class="center"><input type="radio" name="III_q2" value="0"></td></tr>
+        <tr><td>Faz a conclusão do assunto sem apresentar ideias novas?</td><td class="center"><input type="radio" name="III_q3" value="1" required></td><td class="center"><input type="radio" name="III_q3" value="0.75"></td><td class="center"><input type="radio" name="III_q3" value="0.5"></td><td class="center"><input type="radio" name="III_q3" value="0"></td></tr>
+        <tr><td>Reenfatiza a importância do assunto para a vida pessoal e profissional da audiência?</td><td class="center"><input type="radio" name="III_q4" value="1" required></td><td class="center"><input type="radio" name="III_q4" value="0.75"></td><td class="center"><input type="radio" name="III_q4" value="0.5"></td><td class="center"><input type="radio" name="III_q4" value="0"></td></tr>
+        <tr><td>O fecho transmite à audiência finalização apropriada do assunto?</td><td class="center"><input type="radio" name="III_q5" value="1" required></td><td class="center"><input type="radio" name="III_q5" value="0.75"></td><td class="center"><input type="radio" name="III_q5" value="0.5"></td><td class="center"><input type="radio" name="III_q5" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- IV COMPORTAMENTO NA PLATAFORMA (2,0) -->
+    <table>
+      <tr class="section-title"><th>IV - COMPORTAMENTO NA PLATAFORMA (2,0)</th><th class="center">ÓTIMO</th><th class="center">BOM</th><th class="center">REGULAR</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-IV">
+        <tr><td>Mantém o controle emocional?</td><td class="center"><input type="radio" name="IV_q1" value="1" required></td><td class="center"><input type="radio" name="IV_q1" value="0.75"></td><td class="center"><input type="radio" name="IV_q1" value="0.5"></td><td class="center"><input type="radio" name="IV_q1" value="0"></td></tr>
+        <tr><td>Movimenta-se com naturalidade, utilizando-se de toda a extensão e profundidade da plataforma?</td><td class="center"><input type="radio" name="IV_q2" value="1" required></td><td class="center"><input type="radio" name="IV_q2" value="0.75"></td><td class="center"><input type="radio" name="IV_q2" value="0.5"></td><td class="center"><input type="radio" name="IV_q2" value="0"></td></tr>
+        <tr><td>Utiliza gestos adequados?</td><td class="center"><input type="radio" name="IV_q3" value="1" required></td><td class="center"><input type="radio" name="IV_q3" value="0.75"></td><td class="center"><input type="radio" name="IV_q3" value="0.5"></td><td class="center"><input type="radio" name="IV_q3" value="0"></td></tr>
+        <tr><td>Mantém contato visual abrangente a maior parte do tempo?</td><td class="center"><input type="radio" name="IV_q4" value="1" required></td><td class="center"><input type="radio" name="IV_q4" value="0.75"></td><td class="center"><input type="radio" name="IV_q4" value="0.5"></td><td class="center"><input type="radio" name="IV_q4" value="0"></td></tr>
+        <tr><td>Encontra-se com boa apresentação pessoal?</td><td class="center"><input type="radio" name="IV_q5" value="1" required></td><td class="center"><input type="radio" name="IV_q5" value="0.75"></td><td class="center"><input type="radio" name="IV_q5" value="0.5"></td><td class="center"><input type="radio" name="IV_q5" value="0"></td></tr>
+        <tr><td>Ao movimentar-se, utiliza a extensão e profundidade da plataforma?</td><td class="center"><input type="radio" name="IV_q6" value="1" required></td><td class="center"><input type="radio" name="IV_q6" value="0.75"></td><td class="center"><input type="radio" name="IV_q6" value="0.5"></td><td class="center"><input type="radio" name="IV_q6" value="0"></td></tr>
+        <tr><td>Ao responder as perguntas o faz de acordo com a técnica?</td><td class="center"><input type="radio" name="IV_q7" value="1" required></td><td class="center"><input type="radio" name="IV_q7" value="0.75"></td><td class="center"><input type="radio" name="IV_q7" value="0.5"></td><td class="center"><input type="radio" name="IV_q7" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- V COMUNICAÇÃO (2,0) -->
+    <table>
+      <tr class="section-title"><th>V - COMUNICAÇÃO (2,0)</th><th class="center">ÓTIMO</th><th class="center">BOM</th><th class="center">REGULAR</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-V">
+        <tr><td>Mantém o volume de voz compatível com o ambiente?</td><td class="center"><input type="radio" name="V_q1" value="1" required></td><td class="center"><input type="radio" name="V_q1" value="0.75"></td><td class="center"><input type="radio" name="V_q1" value="0.5"></td><td class="center"><input type="radio" name="V_q1" value="0"></td></tr>
+        <tr><td>Usa corretamente as concordâncias verbais e nominais?</td><td class="center"><input type="radio" name="V_q2" value="1" required></td><td class="center"><input type="radio" name="V_q2" value="0.75"></td><td class="center"><input type="radio" name="V_q2" value="0.5"></td><td class="center"><input type="radio" name="V_q2" value="0"></td></tr>
+        <tr><td>Emprega oportunamente pausa e variações no tom da voz?</td><td class="center"><input type="radio" name="V_q3" value="1" required></td><td class="center"><input type="radio" name="V_q3" value="0.75"></td><td class="center"><input type="radio" name="V_q3" value="0.5"></td><td class="center"><input type="radio" name="V_q3" value="0"></td></tr>
+        <tr><td>Se expressa sem vícios de linguagem?</td><td class="center"><input type="radio" name="V_q4" value="1" required></td><td class="center"><input type="radio" name="V_q4" value="0.75"></td><td class="center"><input type="radio" name="V_q4" value="0.5"></td><td class="center"><input type="radio" name="V_q4" value="0"></td></tr>
+        <tr><td>Pronuncia as palavras de acordo com a prosódia?</td><td class="center"><input type="radio" name="V_q5" value="1" required></td><td class="center"><input type="radio" name="V_q5" value="0.75"></td><td class="center"><input type="radio" name="V_q5" value="0.5"></td><td class="center"><input type="radio" name="V_q5" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- VI RECURSOS SENSORIAIS (1,0) -->
+    <table>
+      <tr class="section-title"><th>VI - RECURSOS SENSORIAIS (1,0)</th><th class="center">ÓTIMO</th><th class="center">BOM</th><th class="center">REGULAR</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-VI">
+        <tr><td>Confecciona os recursos sensoriais de acordo com a técnica?</td><td class="center"><input type="radio" name="VI_q1" value="1" required></td><td class="center"><input type="radio" name="VI_q1" value="0.75"></td><td class="center"><input type="radio" name="VI_q1" value="0.5"></td><td class="center"><input type="radio" name="VI_q1" value="0"></td></tr>
+        <tr><td>Emprega-o de modo oportuno, facilitando a aprendizagem do aluno?</td><td class="center"><input type="radio" name="VI_q2" value="1" required></td><td class="center"><input type="radio" name="VI_q2" value="0.75"></td><td class="center"><input type="radio" name="VI_q2" value="0.5"></td><td class="center"><input type="radio" name="VI_q2" value="0"></td></tr>
+        <tr><td>Manuseia adequadamente os auxílios à instrução?</td><td class="center"><input type="radio" name="VI_q3" value="1" required></td><td class="center"><input type="radio" name="VI_q3" value="0.75"></td><td class="center"><input type="radio" name="VI_q3" value="0.5"></td><td class="center"><input type="radio" name="VI_q3" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- VII TEMPO (0,5) -->
+    <table>
+      <tr class="section-title"><th>VII - TEMPO (0,5)</th><th class="center">ÓTIMO</th><th class="center">INSUFICIENTE</th></tr>
+      <tbody id="sec-VII">
+        <tr><td>Fez sua apresentação dentro do tempo previsto?</td><td class="center"><input type="radio" name="VII_q1" value="1" required></td><td class="center"><input type="radio" name="VII_q1" value="0"></td></tr>
+      </tbody>
+    </table>
+
+    <!-- AVALIAÇÃO GLOBAL -->
+    <table>
+      <tr class="section-title"><th colspan="3">AVALIAÇÃO GLOBAL</th></tr>
+      <tr><th class="center">APTO</th><th class="center">NÃO APTO</th><th class="center">GRAU</th></tr>
+      <tr>
+        <td><input type="checkbox" id="apto"></td>
+        <td><input type="checkbox" id="naoApto"></td>
+        <td class="center" id="grauCell"></td>
+      </tr>
+      <tr><td>Local de realização:<input id="local" type="text" style="width:95%"></td><td>Data:<input id="data" type="date" style="width:95%"></td><td></td></tr>
+    </table>
+
+    <div class="controls no-print">
+      <button type="button" id="calcBtn" class="primary">Calcular Nota</button>
+      <button type="button" id="saveJson">Baixar JSON</button>
+      <button type="button" id="printBtn">Salvar/Imprimir PDF</button>
+      <button type="reset">Limpar</button>
+    </div>
+
+    <div class="result" id="resultArea" aria-live="polite">
+      <strong>Resultado:</strong>
+      <div id="scoresSummary">Não calculado ainda.</div>
+    </div>
+  </form>
+
+  <script>
+    (function(){
+      // Seções e seus pesos (valor total por seção conforme PDF)
+      const sectionWeights = {
+        I: 1.0,
+        II: 2.5,
+        III: 1.0,
+        IV: 2.0,
+        V: 2.0,
+        VI: 1.0,
+        VII: 0.5
+      };
+
+      // Função para ler radios de uma seção (prefixo ex: "I_")
+      function calcSection(prefix, itemCount){
+        let sumNormalized = 0;
+        let count = 0;
+        // percorre inputs com name começando com prefix
+        document.querySelectorAll(`input[name^="${prefix}_"]`).forEach((el)=>{
+          const v = parseFloat(el.value);
+          if (el.checked) { sumNormalized += v; count++; }
+        });
+        // se algum não preenchido, tentativa de contar all names for normalization
+        const names = Array.from(new Set(Array.from(document.querySelectorAll(`input[name^="${prefix}_"]`)).map(i=>i.name)));
+        const expected = names.length;
+        // Se nem todas respondidas, não calcular
+        if (expected !== names.length && expected === 0) return {ok:false};
+        // compute average normalized (0..1)
+        if (names.length === 0) return {ok:false};
+        const avg = sumNormalized / names.length; // each value is between 0 and 1 (or 0.75,0.5)
+        const sectionScore = avg * sectionWeights[prefix];
+        return {ok:true, avg, sectionScore, items: names.length};
+      }
+
+      // Calcula nota total a partir das radios
+      function calculateFull(){
+        // For robustness, compute each section by summing selected values and dividing by number of items
+        const sections = ['I','II','III','IV','V','VI','VII'];
+        let total = 0;
+        let details = {};
+        let allAnswered = true;
+
+        sections.forEach(sec=>{
+          const inputs = Array.from(document.querySelectorAll(`input[name^="${sec}_"]`));
+          const names = Array.from(new Set(inputs.map(i=>i.name)));
+          if (names.length === 0) { details[sec] = {ok:false, sectionScore:0, items:0}; return; }
+          let sum = 0;
+          let answeredCount = 0;
+          names.forEach(name=>{
+            const checked = document.querySelector(`input[name="${name}"]:checked`);
+            if (checked){ sum += parseFloat(checked.value); answeredCount++; }
+          });
+          if (answeredCount !== names.length) allAnswered = false;
+          const avg = answeredCount? (sum / names.length) : 0;
+          const sectionScore = avg * sectionWeights[sec];
+          details[sec] = {ok: answeredCount===names.length, avg, sectionScore, items: names.length};
+          total += sectionScore;
+        });
+
+        // Max total possible is sum of weights
+        const maxTotal = Object.values(sectionWeights).reduce((a,b)=>a+b,0);
+        const percentage = (total / maxTotal) * 100;
+        // Grau: distribuição simples (pode ajustar)
+        let grau = '';
+        if (percentage >= 90) grau = 'A';
+        else if (percentage >= 75) grau = 'B';
+        else if (percentage >= 60) grau = 'C';
+        else grau = 'D';
+
+        return {total, maxTotal, percentage, grau, details, allAnswered};
+      }
+
+      // Atualiza UI com resultado
+      document.getElementById('calcBtn').addEventListener('click', ()=>{
+        const res = calculateFull();
+        const cell = document.getElementById('grauCell');
+        cell.textContent = `${res.total.toFixed(2)} / ${res.maxTotal.toFixed(2)} (${res.percentage.toFixed(1)}%) - Grau ${res.grau}`;
+        const summary = [];
+        for (const s in res.details){
+          const d = res.details[s];
+          summary.push(`${s}: ${d.sectionScore.toFixed(2)} / ${sectionWeights[s].toFixed(2)}${d.ok? '':' (incompleto)'}`);
+        }
+        document.getElementById('scoresSummary').innerHTML = summary.join('<br>');
+      });
+
+      // Baixar JSON com respostas e notas calculadas
+      document.getElementById('saveJson').addEventListener('click', ()=>{
+        const res = calculateFull();
+        const data = {
+          meta: {
+            turma: document.getElementById('turma').value,
+            om: document.getElementById('om').value,
+            aluno: document.getElementById('aluno').value,
+            instrutor: document.getElementById('instrutor').value,
+            ano: document.getElementById('ano').value,
+            local: document.getElementById('local').value,
+            data: document.getElementById('data').value
+          },
+          responses: {},
+          summary: res
+        };
+        // coletar valores escolhidos
+        document.querySelectorAll('input[type="radio"]').forEach(r=>{
+          if(r.checked){
+            data.responses[r.name] = r.value;
+          } else if (!(r.name in data.responses)) {
+            // ensure key exists only when picked; this keeps file small
+          }
+        });
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json;charset=utf-8'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `FAI_${data.meta.aluno || 'sem-nome'}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+
+      // Imprimir / salvar como PDF
+      document.getElementById('printBtn').addEventListener('click', ()=>{
+        // recalcula antes de imprimir
+        document.getElementById('calcBtn').click();
+        window.print();
+      });
+
+      // Previne submit real (não usado)
+      document.getElementById('faiForm').addEventListener('submit', function(e){ e.preventDefault(); });
+
+      // Comportamento simples para checkboxes APTO / NÃO APTO (exclusivo)
+      document.getElementById('apto').addEventListener('change', (e)=>{
+        if(e.target.checked) document.getElementById('naoApto').checked = false;
+      });
+      document.getElementById('naoApto').addEventListener('change', (e)=>{
+        if(e.target.checked) document.getElementById('apto').checked = false;
+      });
+
+    })();
+  </script>
+</body>
+</html>
