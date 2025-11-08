@@ -5,474 +5,518 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CURSO CTP001 - Ficha de Apreciação Individual (FAI)</title>
 
-  <!-- Bootstrap 5 CDN -->
+  <!-- Bootstrap 5 CSS (CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Estilo mínimo para largura e legibilidade; sem bordas customizadas -->
   <style>
-    :root{
-      --bg:#f5f6f7;     /* cinza claro predominante */
-      --card:#ffffff;
-      --muted:#6b6b6b;
-      --primary-blue:#0b63b6; /* botões azuis */
-      --primary-blue-dark:#055a9e;
-      --danger-red:#c82333; /* botão limpar vermelho */
-      --border:#e0e0e0;
-      --gap:0.75rem;
-    }
-
-    body{background:var(--bg); color:#111; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-    .page-wrapper{max-width:1100px; margin:24px auto; padding:18px;}
-    .card{background:var(--card); border:1px solid var(--border); box-shadow:0 1px 2px rgba(0,0,0,0.03);}
-    h1{font-size:1.15rem; margin-bottom:0.5rem}
-    .meta .form-control{min-height:42px}
-    table{width:100%; border-collapse:collapse; font-size:0.92rem;}
-    th, td{border:1px solid var(--border); padding:0.52rem; vertical-align:middle}
-    .section-title th{background:#f1f3f5; font-weight:700}
-    .options{display:flex; gap:0.4rem; justify-content:center; align-items:center}
-    .radio-cell{display:flex; justify-content:center; align-items:center; padding:0.25rem}
-    .controls .btn-primary{background:var(--primary-blue); border-color:var(--primary-blue-dark)}
-    .controls .btn-outline-primary{color:var(--primary-blue); border-color:var(--primary-blue)}
-    .controls .btn-danger{background:var(--danger-red); border-color:rgba(0,0,0,0.06)}
-    .result{background:#fbfcfd; border:1px dashed #d6dbe0; padding:0.75rem; border-radius:6px}
-    @media (max-width:575.98px){
-      th, td{font-size:0.86rem; padding:0.45rem}
-      .meta .col-6{flex:0 0 50%; max-width:50%}
-    }
-    @media print{
-      .no-print{display:none !important}
-      body{background:white}
-    }
+    body { background:#f5f6f7; }
+    .page-wrapper { max-width:1100px; margin:20px auto; }
+    /* Apenas ajuste fino em pequenos detalhes visuais; a estrutura e bordas são do Bootstrap */
+    .section-title th { background:#f1f3f5; font-weight:700; }
+    @media print { .no-print { display:none !important; } }
   </style>
 </head>
 <body>
   <div class="page-wrapper">
-    <div class="card p-3">
-      <div class="d-flex justify-content-between align-items-start mb-2">
-        <div>
-          <h1 class="mb-0">CURSO CTP001 - FICHA DE APRECIAÇÃO INDIVIDUAL (FAI)</h1>
-          <small class="text-muted">Ficha para avaliação conforme formulário</small>
-        </div>
-        <div class="text-end small text-muted">Versão web</div>
-      </div>
-
-      <form id="faiForm" class="needs-validation" novalidate>
-        <div class="row g-2 mb-3 meta">
-          <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label small">Turma</label>
-            <input id="turma" class="form-control" type="text" />
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <h5 class="card-title mb-0">CURSO CTP001 - FICHA DE APRECIAÇÃO INDIVIDUAL (FAI)</h5>
+            <small class="text-muted">Ficha para avaliação</small>
           </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label small">OM</label>
-            <input id="om" class="form-control" type="text" />
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label small">Aluno</label>
-            <input id="aluno" class="form-control" type="text" required />
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label small">Instrutor</label>
-            <input id="instrutor" class="form-control" type="text" />
-          </div>
-          <div class="col-6 col-sm-4 col-md-2">
-            <label class="form-label small">Ano</label>
-            <input id="ano" class="form-control" type="text" placeholder="2025" />
-          </div>
+          <div class="text-muted small">Versão web</div>
         </div>
 
-        <!-- Seção padrão: função para compactar repetição no HTML -->
-        <!-- I - INTRODUÇÃO (1,0) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>I - INTRODUÇÃO (1,0)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">BOM</th>
-                  <th class="text-center">REGULAR</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Inicia a apresentação cumprimentando a audiência?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q1" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q1" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q1" value="0"></td></tr>
-
-                <tr><td>Desperta a atenção da audiência para o assunto?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q2" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q2" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q2" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q2" value="0"></td></tr>
-
-                <tr><td>Mostra a importância do assunto para a vida profissional e pessoal da audiência?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q3" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q3" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q3" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q3" value="0"></td></tr>
-
-                <tr><td>Apresenta o Objetivo Específico da apresentação?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q4" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q4" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q4" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q4" value="0"></td></tr>
-
-                <tr><td>Apresenta o roteiro fazendo um pequeno sumário dos tópicos?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q5" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q5" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q5" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q5" value="0"></td></tr>
-
-                <tr><td>Realiza a introdução em torno do estipulado pela técnica?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q6" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q6" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q6" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="I_q6" value="0"></td></tr>
-              </tbody>
-            </table>
+        <form id="faiForm" class="needs-validation" novalidate>
+          <div class="row g-2 mb-3">
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label small">Turma</label>
+              <input id="turma" class="form-control form-control-sm" type="text" />
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label small">OM</label>
+              <input id="om" class="form-control form-control-sm" type="text" />
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label small">Aluno</label>
+              <input id="aluno" class="form-control form-control-sm" type="text" required />
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label small">Instrutor</label>
+              <input id="instrutor" class="form-control form-control-sm" type="text" />
+            </div>
+            <div class="col-6 col-sm-4 col-md-2">
+              <label class="form-label small">Ano</label>
+              <input id="ano" class="form-control form-control-sm" type="text" placeholder="2025" />
+            </div>
           </div>
-        </div>
 
-        <!-- II - DESENVOLVIMENTO (2,5) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>II - DESENVOLVIMENTO (2,5)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">BOM</th>
-                  <th class="text-center">REGULAR</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Desenvolve cada tópico do roteiro, de forma clara, estabelecendo relações entre as ideias?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q1" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q1" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q1" value="0"></td></tr>
-
-                <tr><td>Estabelece transição entre os tópicos apresentados no roteiro?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q2" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q2" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q2" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q2" value="0"></td></tr>
-
-                <tr><td>Esclarece termos, siglas, etc., não familiares à audiência?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q3" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q3" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q3" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q3" value="0"></td></tr>
-
-                <tr><td>Usa exemplos, citações, analogias, estatísticas etc., ao menos uma vez, para fundamentar as ideias expostas?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q4" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q4" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q4" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q4" value="0"></td></tr>
-
-                <tr><td>Encoraja a audiência a participar da instrução?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q5" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q5" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q5" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q5" value="0"></td></tr>
-
-                <tr><td>Verifica o alcance dos objetivos operacionalizados?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q6" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q6" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q6" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q6" value="0"></td></tr>
-
-                <tr><td>Desenvolve o conteúdo, de acordo com o planejado?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q7" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q7" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q7" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q7" value="0"></td></tr>
-
-                <tr><td>Demonstra conhecimento do assunto ministrado?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q8" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q8" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q8" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q8" value="0"></td></tr>
-
-                <tr><td>Realiza o desenvolvimento em torno do estipulado pela técnica?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q9" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q9" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q9" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q9" value="0"></td></tr>
-
-                <tr><td>Controla a participação da audiência?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q10" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q10" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q10" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q10" value="0"></td></tr>
-
-                <tr><td>Esclarece as dúvidas da audiência quando solicitado?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q11" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q11" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q11" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="II_q11" value="0"></td></tr>
-              </tbody>
-            </table>
+          <!-- Repetir estrutura de tabela com classes do Bootstrap (table, table-bordered, table-sm, table-responsive) -->
+          <!-- I - INTRODUÇÃO -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>I - INTRODUÇÃO (1,0)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">BOM</th>
+                    <th class="text-center">REGULAR</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Inicia a apresentação cumprimentando a audiência?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q1" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q1" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q1" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Desperta a atenção da audiência para o assunto?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q2" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q2" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q2" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q2" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Mostra a importância do assunto para a vida profissional e pessoal da audiência?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q3" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q3" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q3" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q3" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Apresenta o Objetivo Específico da apresentação?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q4" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q4" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q4" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q4" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Apresenta o roteiro fazendo um pequeno sumário dos tópicos?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q5" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q5" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q5" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q5" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Realiza a introdução em torno do estipulado pela técnica?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q6" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q6" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q6" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="I_q6" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- III - CONCLUSÃO (1,0) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>III - CONCLUSÃO (1,0)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">BOM</th>
-                  <th class="text-center">REGULAR</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Revisa os tópicos do roteiro, enfatizando as principais ideias?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q1" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q1" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q1" value="0"></td></tr>
+          <!-- II - DESENVOLVIMENTO -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>II - DESENVOLVIMENTO (2,5)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">BOM</th>
+                    <th class="text-center">REGULAR</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Desenvolve cada tópico do roteiro, de forma clara, estabelecendo relações entre as ideias?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q1" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q1" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q1" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Relaciona as principais ideias ao objetivo da subunidade?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q2" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q2" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q2" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q2" value="0"></td></tr>
+                  <tr>
+                    <td>Estabelece transição entre os tópicos apresentados no roteiro?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q2" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q2" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q2" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q2" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Faz a conclusão do assunto sem apresentar ideias novas?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q3" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q3" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q3" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q3" value="0"></td></tr>
+                  <tr>
+                    <td>Esclarece termos, siglas, etc., não familiares à audiência?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q3" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q3" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q3" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q3" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Reenfatiza a importância do assunto para a vida pessoal e profissional da audiência?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q4" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q4" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q4" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q4" value="0"></td></tr>
+                  <tr>
+                    <td>Usa exemplos, citações, analogias, estatísticas etc., ao menos uma vez, para fundamentar as ideias expostas?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q4" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q4" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q4" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q4" value="0"></div></td>
+                  </tr>
 
-                <tr><td>O fecho transmite à audiência finalização apropriada do assunto?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q5" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q5" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q5" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="III_q5" value="0"></td></tr>
-              </tbody>
-            </table>
+                  <tr>
+                    <td>Encoraja a audiência a participar da instrução?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q5" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q5" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q5" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q5" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Verifica o alcance dos objetivos operacionalizados?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q6" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q6" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q6" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q6" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Desenvolve o conteúdo, de acordo com o planejado?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q7" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q7" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q7" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q7" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Demonstra conhecimento do assunto ministrado?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q8" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q8" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q8" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q8" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Realiza o desenvolvimento em torno do estipulado pela técnica?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q9" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q9" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q9" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q9" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Controla a participação da audiência?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q10" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q10" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q10" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q10" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Esclarece as dúvidas da audiência quando solicitado?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q11" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q11" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q11" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="II_q11" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- IV - COMPORTAMENTO NA PLATAFORMA (2,0) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>IV - COMPORTAMENTO NA PLATAFORMA (2,0)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">BOM</th>
-                  <th class="text-center">REGULAR</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Mantém o controle emocional?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q1" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q1" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q1" value="0"></td></tr>
-
-                <tr><td>Movimenta-se com naturalidade, utilizando-se de toda a extensão e profundidade da plataforma?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q2" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q2" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q2" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q2" value="0"></td></tr>
-
-                <tr><td>Utiliza gestos adequados?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q3" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q3" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q3" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q3" value="0"></td></tr>
-
-                <tr><td>Mantém contato visual abrangente a maior parte do tempo?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q4" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q4" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q4" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q4" value="0"></td></tr>
-
-                <tr><td>Encontra-se com boa apresentação pessoal?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q5" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q5" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q5" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q5" value="0"></td></tr>
-
-                <tr><td>Ao movimentar-se, utiliza a extensão e profundidade da plataforma?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q6" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q6" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q6" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q6" value="0"></td></tr>
-
-                <tr><td>Ao responder as perguntas o faz de acordo com a técnica?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q7" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q7" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q7" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="IV_q7" value="0"></td></tr>
-              </tbody>
-            </table>
+          <!-- III, IV, V, VI, VII seguem mesma estrutura -->
+          <!-- Para economizar espaço aqui, repita o padrão usado acima para as demais seções -->
+          <!-- --- Incluir III --- -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>III - CONCLUSÃO (1,0)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">BOM</th>
+                    <th class="text-center">REGULAR</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Revisa os tópicos do roteiro, enfatizando as principais ideias?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q1" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q1" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q1" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Relaciona as principais ideias ao objetivo da subunidade?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q2" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q2" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q2" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q2" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Faz a conclusão do assunto sem apresentar ideias novas?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q3" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q3" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q3" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q3" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Reenfatiza a importância do assunto para a vida pessoal e profissional da audiência?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q4" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q4" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q4" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q4" value="0"></div></td>
+                  </tr>
+                  <tr>
+                    <td>O fecho transmite à audiência finalização apropriada do assunto?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q5" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q5" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q5" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="III_q5" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- V - COMUNICAÇÃO (2,0) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>V - COMUNICAÇÃO (2,0)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">BOM</th>
-                  <th class="text-center">REGULAR</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Mantém o volume de voz compatível com o ambiente?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q1" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q1" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q1" value="0"></td></tr>
+          <!-- IV - COMPORTAMENTO NA PLATAFORMA -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>IV - COMPORTAMENTO NA PLATAFORMA (2,0)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">BOM</th>
+                    <th class="text-center">REGULAR</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mantém o controle emocional?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q1" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q1" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q1" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Usa corretamente as concordâncias verbais e nominais?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q2" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q2" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q2" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q2" value="0"></td></tr>
+                  <tr>
+                    <td>Movimenta-se com naturalidade, utilizando-se de toda a extensão e profundidade da plataforma?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q2" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q2" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q2" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q2" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Emprega oportunamente pausa e variações no tom da voz?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q3" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q3" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q3" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q3" value="0"></td></tr>
+                  <tr>
+                    <td>Utiliza gestos adequados?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q3" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q3" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q3" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q3" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Se expressa sem vícios de linguagem?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q4" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q4" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q4" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q4" value="0"></td></tr>
+                  <tr>
+                    <td>Mantém contato visual abrangente a maior parte do tempo?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q4" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q4" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q4" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q4" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Pronuncia as palavras de acordo com a prosódia?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q5" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q5" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q5" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="V_q5" value="0"></td></tr>
-              </tbody>
-            </table>
+                  <tr>
+                    <td>Encontra-se com boa apresentação pessoal?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q5" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q5" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q5" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q5" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Ao movimentar-se, utiliza a extensão e profundidade da plataforma?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q6" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q6" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q6" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q6" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Ao responder as perguntas o faz de acordo com a técnica?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q7" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q7" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q7" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="IV_q7" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- VI - RECURSOS SENSORIAIS (1,0) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>VI - RECURSOS SENSORIAIS (1,0)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">BOM</th>
-                  <th class="text-center">REGULAR</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Confecciona os recursos sensoriais de acordo com a técnica?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q1" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q1" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q1" value="0"></td></tr>
+          <!-- V - COMUNICAÇÃO -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>V - COMUNICAÇÃO (2,0)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">BOM</th>
+                    <th class="text-center">REGULAR</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mantém o volume de voz compatível com o ambiente?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q1" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q1" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q1" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Emprega-o de modo oportuno, facilitando a aprendizagem do aluno?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q2" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q2" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q2" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q2" value="0"></td></tr>
+                  <tr>
+                    <td>Usa corretamente as concordâncias verbais e nominais?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q2" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q2" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q2" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q2" value="0"></div></td>
+                  </tr>
 
-                <tr><td>Manuseia adequadamente os auxílios à instrução?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q3" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q3" value="0.75"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q3" value="0.5"></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VI_q3" value="0"></td></tr>
-              </tbody>
-            </table>
+                  <tr>
+                    <td>Emprega oportunamente pausa e variações no tom da voz?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q3" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q3" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q3" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q3" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Se expressa sem vícios de linguagem?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q4" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q4" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q4" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q4" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Pronuncia as palavras de acordo com a prosódia?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q5" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q5" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q5" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="V_q5" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- VII - TEMPO (0,5) -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr>
-                  <th>VII - TEMPO (0,5)</th>
-                  <th class="text-center">ÓTIMO</th>
-                  <th class="text-center">INSUFICIENTE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Fez sua apresentação dentro do tempo previsto?</td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VII_q1" value="1" required></td>
-                  <td class="radio-cell"><input class="form-check-input" type="radio" name="VII_q1" value="0"></td></tr>
-              </tbody>
-            </table>
+          <!-- VI - RECURSOS SENSORIAIS -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>VI - RECURSOS SENSORIAIS (1,0)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">BOM</th>
+                    <th class="text-center">REGULAR</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Confecciona os recursos sensoriais de acordo com a técnica?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q1" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q1" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q1" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Emprega-o de modo oportuno, facilitando a aprendizagem do aluno?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q2" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q2" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q2" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q2" value="0"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>Manuseia adequadamente os auxílios à instrução?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q3" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q3" value="0.75"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q3" value="0.5"></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VI_q3" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- Avaliação Global -->
-        <div class="mb-3">
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead class="section-title">
-                <tr><th colspan="3">AVALIAÇÃO GLOBAL</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center align-middle" style="width:33%"><label class="form-check-label small">APTO<br><input id="apto" class="form-check-input mt-1" type="checkbox"></label></td>
-                  <td class="text-center align-middle" style="width:33%"><label class="form-check-label small">NÃO APTO<br><input id="naoApto" class="form-check-input mt-1" type="checkbox"></label></td>
-                  <td class="text-center align-middle" style="width:34%"><div class="small text-muted">GRAU</div><div id="grauCell" class="fw-semibold"></div></td>
-                </tr>
-                <tr>
-                  <td>Local de realização:<input id="local" class="form-control form-control-sm mt-1" type="text"></td>
-                  <td>Data:<input id="data" class="form-control form-control-sm mt-1" type="date"></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- VII - TEMPO -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr>
+                    <th>VII - TEMPO (0,5)</th>
+                    <th class="text-center">ÓTIMO</th>
+                    <th class="text-center">INSUFICIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Fez sua apresentação dentro do tempo previsto?</td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VII_q1" value="1" required></div></td>
+                    <td class="text-center"><div class="form-check"><input class="form-check-input" type="radio" name="VII_q1" value="0"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <!-- Controles -->
-        <div class="d-flex flex-column flex-sm-row gap-2 align-items-stretch no-print">
-          <div class="d-flex gap-2">
+          <!-- AVALIAÇÃO GLOBAL -->
+          <div class="mb-3">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm mb-0 align-middle">
+                <thead class="section-title">
+                  <tr><th colspan="3">AVALIAÇÃO GLOBAL</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center" style="width:33%"><div class="form-check"><input id="apto" class="form-check-input" type="checkbox"><label class="form-check-label small ms-2">APTO</label></div></td>
+                    <td class="text-center" style="width:33%"><div class="form-check"><input id="naoApto" class="form-check-input" type="checkbox"><label class="form-check-label small ms-2">NÃO APTO</label></div></td>
+                    <td class="text-center" style="width:34%"><div class="small text-muted">GRAU</div><div id="grauCell" class="fw-semibold"></div></td>
+                  </tr>
+                  <tr>
+                    <td>Local de realização:<input id="local" class="form-control form-control-sm mt-1" type="text"></td>
+                    <td>Data:<input id="data" class="form-control form-control-sm mt-1" type="date"></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- CONTROLES -->
+          <div class="d-flex gap-2 flex-wrap no-print">
             <button type="button" id="calcBtn" class="btn btn-primary">Calcular Nota</button>
             <button type="button" id="saveJson" class="btn btn-outline-primary">Baixar JSON</button>
             <button type="button" id="printBtn" class="btn btn-outline-primary">Salvar/Imprimir PDF</button>
             <button type="reset" id="resetBtn" class="btn btn-danger">Limpar</button>
-          </div>
-          <div class="ms-sm-auto result w-100 w-sm-auto" id="resultArea">
-            <div class="small text-muted">Resultado</div>
-            <div id="scoresSummary" class="fw-semibold">Não calculado ainda.</div>
-          </div>
-        </div>
-      </form>
 
-      <div class="mt-3 text-end small text-muted no-print">Dica: use "Salvar/Imprimir PDF" e escolha "Salvar como PDF" no diálogo de impressão</div>
+            <div class="ms-auto p-2 border rounded bg-white d-none d-sm-block" style="min-width:260px;">
+              <div class="small text-muted">Resultado</div>
+              <div id="scoresSummary" class="fw-semibold">Não calculado ainda.</div>
+            </div>
+          </div>
+
+        </form>
+
+        <div class="mt-2 small text-muted no-print">Dica: use "Salvar/Imprimir PDF" e escolha "Salvar como PDF" no diálogo de impressão</div>
+      </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS (necessário apenas para alguns componentes; é leve) -->
+  <!-- Bootstrap JS bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
@@ -513,7 +557,6 @@
         return {total, maxTotal, percentage, grau, details, allAnswered};
       }
 
-      // Atualiza UI
       document.getElementById('calcBtn').addEventListener('click', ()=>{
         const res = calculateFull();
         document.getElementById('grauCell').textContent = `${res.total.toFixed(2)} / ${res.maxTotal.toFixed(2)} (${res.percentage.toFixed(1)}%) - Grau ${res.grau}`;
@@ -525,7 +568,6 @@
         document.getElementById('scoresSummary').innerHTML = summary.join('<br>');
       });
 
-      // Baixar JSON
       document.getElementById('saveJson').addEventListener('click', ()=>{
         const res = calculateFull();
         const data = {
@@ -553,23 +595,17 @@
         a.remove();
       });
 
-      // Imprimir / salvar PDF
       document.getElementById('printBtn').addEventListener('click', ()=>{
         document.getElementById('calcBtn').click();
         window.print();
       });
 
-      // Limpar exclusividade APTO / NÃO APTO
+      // Exclusividade APTO / NÃO APTO
       document.getElementById('apto').addEventListener('change', (e)=>{ if(e.target.checked) document.getElementById('naoApto').checked = false; });
       document.getElementById('naoApto').addEventListener('change', (e)=>{ if(e.target.checked) document.getElementById('apto').checked = false; });
 
-      // Validação simples do formulário para dispositivos móveis
-      (function(){
-        const form = document.getElementById('faiForm');
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-        });
-      })();
+      // Evita submit real
+      document.getElementById('faiForm').addEventListener('submit', function(e){ e.preventDefault(); });
 
     })();
   </script>
