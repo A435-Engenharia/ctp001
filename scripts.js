@@ -73,7 +73,7 @@
         });
         
         // Enviar para webhook
-        const webhookURL = 'https://cloud.activepieces.com/api/v1/webhooks/PYolUaDZ0aNZ0KKEF1WFg/sync';
+        const webhookURL = 'https://cloud.activepieces.com/api/v1/webhooks/PYolUaDZ0aNZ0KKEF1WFg';
         fetch(webhookURL, {
           method: 'POST',
           headers: {
