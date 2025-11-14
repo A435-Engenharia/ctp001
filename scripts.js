@@ -16,7 +16,7 @@
           names.forEach(name=>{
             const checked = document.querySelector(`input[name="${name}"]:checked`);
             if(checked){ sum += parseFloat(checked.value); answeredCount++; }
-          });
+          }); 
           if(answeredCount !== names.length) allAnswered = false;
           const avg = answeredCount? (sum / names.length) : 0;
           const sectionScore = avg * sectionWeights[sec];
@@ -46,7 +46,7 @@
         document.getElementById('scoresSummary').innerHTML = summary.join('<br>');
       });
 
-      document.getElementById('saveJson').addEventListener('click', ()=>{
+      document.getElementById('sendWebhook').addEventListener('click', ()=>{
         const res = calculateFull();
         const data = {
           meta: {
@@ -64,13 +64,26 @@
         document.querySelectorAll('input[type="radio"]').forEach(r=>{
           if(r.checked) data.responses[r.name] = r.value;
         });
-        const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json;charset=utf-8'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `FAI_${(data.meta.aluno||'sem-nome').replace(/\s+/g,'_')}.json`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        
+        // Enviar para webhook
+        const webhookURL = 'https://cloud.activepieces.com/api/v1/webhooks/PYolUaDZ0aNZ0KKEF1WFg';
+        fetch(webhookURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          if(response.ok) {
+            alert('Ficha salva com sucesso!');
+          } else {
+            alert('Não consegui salvar. Parece que há uma problema na comunicação com o servidor. Exporte para PDF e tente mais tarde. Erro nº: ' + response.status);
+          }
+        })
+        .catch(error => {
+          alert('Não foi possível processar seu pedido de gravação. Salve os dados em PDF. Erro: ' + error.message);
+        });
       });
 
       document.getElementById('printBtn').addEventListener('click', ()=>{
