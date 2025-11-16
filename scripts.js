@@ -1,124 +1,123 @@
-    (function(){
-      const sectionWeights = { I:1.0, II:2.5, III:1.0, IV:2.0, V:2.0, VI:1.0, VII:0.5 };
+(() => {
+  const sectionWeights = { I:1.0, II:2.5, III:1.0, IV:2.0, V:2.0, VI:1.0, VII:0.5 };
+  const sections = Object.keys(sectionWeights);
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-      function calculateFull(){
-        const sections = ['I','II','III','IV','V','VI','VII'];
-        let total = 0;
-        let details = {};
-        let allAnswered = true;
+  function calculateFull() {
+    let total = 0;
+    const details = {};
+    let allAnswered = true;
 
-        sections.forEach(sec=>{
-          const inputs = Array.from(document.querySelectorAll(`input[name^="${sec}_"]`));
-          const names = Array.from(new Set(inputs.map(i=>i.name)));
-          if (names.length === 0) { details[sec] = {ok:false, sectionScore:0, items:0}; return; }
-          let sum = 0;
-          let answeredCount = 0;
-          names.forEach(name=>{
-            const checked = document.querySelector(`input[name="${name}"]:checked`);
-            if(checked){ sum += parseFloat(checked.value); answeredCount++; }
-          }); 
-          if(answeredCount !== names.length) allAnswered = false;
-          const avg = answeredCount? (sum / names.length) : 0;
-          const sectionScore = avg * sectionWeights[sec];
-          details[sec] = {ok: answeredCount===names.length, avg, sectionScore, items: names.length};
-          total += sectionScore;
-        });
+    sections.forEach(sec => {
+      const inputs = $$(`input[name^="${sec}_"]`);
+      const names = Array.from(new Set(inputs.map(i => i.name)));
+      if (!names.length) { details[sec] = { ok:false, sectionScore:0, items:0 }; return; }
 
-        const maxTotal = Object.values(sectionWeights).reduce((a,b)=>a+b,0);
-        const percentage = (total / maxTotal) * 100;
-        let grau = '';
-        if (percentage >= 90) grau = 'A';
-        else if (percentage >= 75) grau = 'B';
-        else if (percentage >= 60) grau = 'C';
-        else grau = 'D';
-
-        return {total, maxTotal, percentage, grau, details, allAnswered};
-      }
-
-      // Atualiza a UI com o cálculo — usada por listeners automáticos
-      function updateScoresUI(){
-        const res = calculateFull();
-        document.getElementById('grauCell').textContent = `${res.total.toFixed(2)} / ${res.maxTotal.toFixed(2)} (${res.percentage.toFixed(1)}%) - Grau ${res.grau}`;
-        const summary = [];
-        for(const s in res.details){
-          const d = res.details[s];
-          summary.push(`${s}: ${d.sectionScore.toFixed(2)} / ${sectionWeights[s].toFixed(2)}${d.ok? '':' (incompleto)'}`);
-        }
-        document.getElementById('scoresSummary').innerHTML = summary.join('<br>');
-      }
-
-      // Calcular automaticamente quando qualquer rádio mudar
-      document.querySelectorAll('input[type="radio"]').forEach(r=> r.addEventListener('change', updateScoresUI));
-
-      // Calcular ao carregar o script
-      updateScoresUI();
-
-      document.getElementById('sendWebhook').addEventListener('click', ()=>{
-        const res = calculateFull();
-        const data = {
-          meta: {
-            turma: document.getElementById('turma').value,
-            om: document.getElementById('om').value,
-            aluno: document.getElementById('aluno').value,
-            instrutor: document.getElementById('instrutor').value,
-            ano: document.getElementById('ano').value,
-            local: document.getElementById('local').value,
-            data: document.getElementById('data').value
-          },
-          responses: {},
-          summary: res
-        };
-        document.querySelectorAll('input[type="radio"]').forEach(r=>{
-          if(r.checked) data.responses[r.name] = r.value;
-        });
-        
-        // Enviar para a função proxy (Netlify) 
-        const proxyEndpoint = 'https://ctp001.netlify.app/api/enviar';
-        console.log('📤 Enviando dados para proxy:', proxyEndpoint);
-        console.log(data);
-
-        fetch(proxyEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then(response => {
-          // ler corpo como JSON ou texto para facilitar debug
-          return response.json().then(json => ({ status: response.status, ok: response.ok, data: json })).catch(() => 
-            response.text().then(text => ({ status: response.status, ok: response.ok, text }))
-          );
-        })
-        .then(result => {
-          console.log('📥 Resposta do proxy:', result);
-          if(result.ok){
-            alert('✅ Ficha salva com sucesso!');
-          } else {
-            const msg = result.data?.error || result.text || 'Erro desconhecido';
-            alert('⚠️ Não consegui salvar. Status: ' + result.status + '\nResposta: ' + msg);
-          }
-        })
-        .catch(error => {
-          console.error('❌ Erro ao enviar para o proxy:', error);
-          alert('❌ Não foi possível processar seu pedido de gravação. Verifique o console (F12) para detalhes.');
-        });
+      let sum = 0, answeredCount = 0;
+      names.forEach(name => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        if (checked) { sum += Number(checked.value) || 0; answeredCount++; }
       });
 
-      var printBtn = document.getElementById('printBtn');
-      if(printBtn){
-        printBtn.addEventListener('click', ()=>{
-          // garante cálculo atualizado antes de imprimir
-          updateScoresUI();
-          window.print();
-        });
+      if (answeredCount !== names.length) allAnswered = false;
+      const avg = names.length ? (sum / names.length) : 0;
+      const sectionScore = avg * sectionWeights[sec];
+      details[sec] = { ok: answeredCount === names.length, avg, sectionScore, items: names.length };
+      total += sectionScore;
+    });
+
+    const maxTotal = Object.values(sectionWeights).reduce((a,b) => a + b, 0);
+    const percentage = maxTotal ? (total / maxTotal) * 100 : 0;
+    const grau = percentage >= 90 ? 'A' : percentage >= 75 ? 'B' : percentage >= 60 ? 'C' : 'D';
+
+    return { total, maxTotal, percentage, grau, details, allAnswered };
+  }
+
+  function updateScoresUI() {
+    const res = calculateFull();
+    const grauCell = $('#grauCell');
+    const summaryEl = '#scoresSummary';
+    if (grauCell) grauCell.textContent = `${res.total.toFixed(2)} / ${res.maxTotal.toFixed(2)} (${res.percentage.toFixed(1)}%) - Grau ${res.grau}`;
+    const el = $(summaryEl);
+    if (el) {
+      el.innerHTML = sections.map(s => {
+        const d = res.details[s];
+        return `${s}: ${d.sectionScore.toFixed(2)} / ${sectionWeights[s].toFixed(2)}${d.ok ? '' : ' (incompleto)'}`;
+      }).join('<br>');
+    }
+  }
+
+  function collectPayload() {
+    const safe = v => (v == null ? '' : String(v));
+    const meta = {
+      turma: safe($('#turma')?.value),
+      om: safe($('#om')?.value),
+      aluno: safe($('#aluno')?.value),
+      instrutor: safe($('#instrutor')?.value),
+      ano: safe($('#ano')?.value),
+      local: safe($('#local')?.value),
+      data: safe($('#data')?.value)
+    };
+    const responses = {};
+    $$('input[type="radio"]').forEach(r => { if (r.checked) responses[r.name] = r.value; });
+    return { meta, responses, summary: calculateFull() };
+  }
+
+  async function sendToFunction(payload) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const res = await fetch('/.netlify/functions/enviar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+      const text = await res.text();
+      let data;
+      try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+      return { ok: res.ok, status: res.status, data };
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // Listeners
+  $$('input[type="radio"]').forEach(r => r.addEventListener('change', updateScoresUI));
+  updateScoresUI();
+
+  const sendBtn = $('#sendWebhook');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', async () => {
+      const payload = collectPayload();
+      try {
+        console.info('📤 Enviando para função local', payload);
+        const result = await sendToFunction(payload);
+        console.info('📥 Resposta:', result);
+        if (result.ok) {
+          alert('✅ Ficha salva com sucesso!');
+        } else {
+          const msg = result.data?.error || result.data || 'Erro desconhecido';
+          alert(`⚠️ Não consegui salvar. Status: ${result.status}\nResposta: ${msg}`);
+        }
+      } catch (err) {
+        const msg = err.name === 'AbortError' ? 'Timeout ao enviar' : 'Falha de rede/processamento';
+        console.error('❌ Erro ao enviar:', err);
+        alert(`❌ Não foi possível processar: ${msg}. Verifique o console (F12).`);
       }
+    });
+  }
 
-      // Exclusividade APTO / NÃO APTO
-      document.getElementById('apto').addEventListener('change', (e)=>{ if(e.target.checked) document.getElementById('naoApto').checked = false; });
-      document.getElementById('naoApto').addEventListener('change', (e)=>{ if(e.target.checked) document.getElementById('apto').checked = false; });
+  const printBtn = $('#printBtn');
+  if (printBtn) printBtn.addEventListener('click', () => { updateScoresUI(); window.print(); });
 
-      // Evita submit real
-      document.getElementById('faiForm').addEventListener('submit', function(e){ e.preventDefault(); });
+  const form = $('#faiForm');
+  if (form) form.addEventListener('submit', e => e.preventDefault());
 
-    })();
+  const aptEl = $('#apto'), naoAptoEl = $('#naoApto');
+  if (aptEl && naoAptoEl) {
+    aptEl.addEventListener('change', () => { if (aptEl.checked) naoAptoEl.checked = false; });
+    naoAptoEl.addEventListener('change', () => { if (naoAptoEl.checked) aptEl.checked = false; });
+  }
+})();

@@ -1,60 +1,59 @@
-const fetch = require('node-fetch');
-
-// Headers CORS para permitir requisições do navegador
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Content-Type': 'application/json'
-};
+const ACTIVEPIECES_URL = 'https://cloud.activepieces.com/api/v1/webhooks/PYolUaDZ0aNZ0KKEF1WFg/sync';
+const ACTIVEPIECES_SECRET = process.env.ACTIVEPIECES_SECRET || 'defina-no-netlify';
 
 exports.handler = async (event) => {
-  // Handle CORS preflight
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: ''
-    };
-  }
-
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      headers: corsHeaders,
       body: JSON.stringify({ error: 'Método não permitido' })
     };
   }
 
   try {
-    const response = await fetch('https://cloud.activepieces.com/api/v1/webhooks/PYolUaDZ0aNZ0KKEF1WFg/sync', {
+    // Timeout com AbortController
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), 15000);
+
+    // Opcional: validação leve (ex.: tamanho máximo)
+    if (!event.body || event.body.length > 200_000) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Payload inválido ou muito grande' }) };
+    }
+
+    const resp = await fetch(ACTIVEPIECES_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-webhook-secret': 'Agencia435'
+        'x-webhook-secret': ACTIVEPIECES_SECRET
       },
-      body: event.body
+      body: event.body,
+      signal: controller.signal
+    }).catch(err => {
+      // Captura abort/timeout antes de ler body
+      throw err;
     });
 
-    if (!response.ok) {
-      return {
-        statusCode: response.status,
-        headers: corsHeaders,
-        body: JSON.stringify({ error: 'Não consegui salvar. Erro do servidor ActivePieces.' })
-      };
-    }
+    clearTimeout(t);
+
+    const text = await resp.text();
+    let data;
+    try { data = text ? JSON.parse(text) : null; } catch { data = text; }
 
     return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: JSON.stringify({ message: 'Ficha salva com sucesso!' })
+      statusCode: resp.status,
+      body: JSON.stringify({
+        ok: resp.ok,
+        status: resp.status,
+        data
+      })
     };
   } catch (error) {
-    console.error('Erro na função enviar.js:', error);
+    const isAbort = error.name === 'AbortError';
+    console.error('Erro enviar.js:', error);
     return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Não foi possível processar seu pedido de gravação. Salve os dados em PDF. Erro: ' + error.message })
+      statusCode: 504,
+      body: JSON.stringify({
+        error: isAbort ? 'Timeout ao contatar o serviço' : `Falha ao processar: ${error.message}`
+      })
     };
   }
 };
