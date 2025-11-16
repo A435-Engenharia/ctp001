@@ -72,25 +72,33 @@
           if(r.checked) data.responses[r.name] = r.value;
         });
         
-        // Enviar para webhook
-        const webhookURL = 'https://cloud.activepieces.com/api/v1/webhooks/PYolUaDZ0aNZ0KKEF1WFg';
-        fetch(webhookURL, {
+        // Enviar para a função proxy (Netlify) que repassa ao ActivePieces
+        const proxyEndpoint = 'https://ctp001.netlify.app/api/enviar';
+        console.log('📤 Enviando dados para proxy:', proxyEndpoint);
+        console.log(data);
+
+        fetch(proxyEndpoint, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'x-webhook-secret': 'Agencia435'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify(data)
         })
         .then(response => {
-          if(response.ok) {
-            alert('Ficha salva com sucesso!');
+          // ler corpo como texto para facilitar debug
+          return response.text().then(text => ({ status: response.status, ok: response.ok, text }));
+        })
+        .then(result => {
+          console.log('📥 Resposta do proxy:', result);
+          if(result.ok){
+            alert('✅ Ficha salva com sucesso!');
           } else {
-            alert('Não consegui salvar. Parece que há uma problema na comunicação com o servidor. Exporte para PDF e tente mais tarde. Erro nº: ' + response.status);
+            alert('⚠️ Não consegui salvar. Status: ' + result.status + '\nResposta: ' + result.text);
           }
         })
         .catch(error => {
-          alert('Não foi possível processar seu pedido de gravação. Salve os dados em PDF. Erro: ' + error.message);
+          console.error('❌ Erro ao enviar para o proxy:', error);
+          alert('❌ Não foi possível processar seu pedido de gravação. Verifique o console (F12) para detalhes.');
         });
       });
 
