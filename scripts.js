@@ -72,7 +72,7 @@
           if(r.checked) data.responses[r.name] = r.value;
         });
         
-        // Enviar para a função proxy (Netlify) que repassa ao ActivePieces
+        // Enviar para a função proxy (Netlify) 
         const proxyEndpoint = 'https://ctp001.netlify.app/api/enviar';
         console.log('📤 Enviando dados para proxy:', proxyEndpoint);
         console.log(data);
@@ -85,15 +85,18 @@
           body: JSON.stringify(data)
         })
         .then(response => {
-          // ler corpo como texto para facilitar debug
-          return response.text().then(text => ({ status: response.status, ok: response.ok, text }));
+          // ler corpo como JSON ou texto para facilitar debug
+          return response.json().then(json => ({ status: response.status, ok: response.ok, data: json })).catch(() => 
+            response.text().then(text => ({ status: response.status, ok: response.ok, text }))
+          );
         })
         .then(result => {
           console.log('📥 Resposta do proxy:', result);
           if(result.ok){
             alert('✅ Ficha salva com sucesso!');
           } else {
-            alert('⚠️ Não consegui salvar. Status: ' + result.status + '\nResposta: ' + result.text);
+            const msg = result.data?.error || result.text || 'Erro desconhecido';
+            alert('⚠️ Não consegui salvar. Status: ' + result.status + '\nResposta: ' + msg);
           }
         })
         .catch(error => {

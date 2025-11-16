@@ -1,8 +1,29 @@
 const fetch = require('node-fetch');
 
+// Headers CORS para permitir requisições do navegador
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Content-Type': 'application/json'
+};
+
 exports.handler = async (event) => {
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: ''
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Método não permitido' };
+    return {
+      statusCode: 405,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Método não permitido' })
+    };
   }
 
   try {
@@ -16,11 +37,24 @@ exports.handler = async (event) => {
     });
 
     if (!response.ok) {
-      throw new Error('Não consegui salvar. Parece que há uma problema na comunicação com o servidor. Exporte para PDF e tente mais tarde.');
+      return {
+        statusCode: response.status,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: 'Não consegui salvar. Erro do servidor ActivePieces.' })
+      };
     }
 
-    return { statusCode: 200, body: 'Ficha salva com sucesso!' };
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: JSON.stringify({ message: 'Ficha salva com sucesso!' })
+    };
   } catch (error) {
-    return { statusCode: 500, body: 'Não foi possível processar seu pedido de gravação. Salve os dados em PDF. Erro: ' + error.message };
+    console.error('Erro na função enviar.js:', error);
+    return {
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Não foi possível processar seu pedido de gravação. Salve os dados em PDF. Erro: ' + error.message })
+    };
   }
 };
